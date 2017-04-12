@@ -32,7 +32,7 @@ public interface MvpView {
 
     void hideLoading();
 
-    void openActivityOnTokenExpire();
+//    void openActivityOnTokenExpire();
 
     void onError(@StringRes int resId);
 
