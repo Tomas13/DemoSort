@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorBlue"
             android:text="@string/enter"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -45,7 +45,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorBlue"
         android:text="@string/exit"
         android:textColor="@color/white" />
 </RelativeLayout>

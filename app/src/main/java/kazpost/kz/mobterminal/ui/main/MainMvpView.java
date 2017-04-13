@@ -25,4 +25,9 @@ import kazpost.kz.mobterminal.ui.base.MvpView;
 public interface MainMvpView extends MvpView {
 
 
+    void openScanActivity();
+
+    void openConfigPrinter();
+
+    void closeCell();
 }

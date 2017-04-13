@@ -17,4 +17,20 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
         super(dataManager);
     }
 
+    @Override
+    public void onSortBtnClicked() {
+        getMvpView().onError("sort");
+
+    }
+
+    @Override
+    public void onConfigPrinterBtnClicked() {
+        getMvpView().onError("config printer");
+
+    }
+
+    @Override
+    public void onCloseCellBtnClicked() {
+        getMvpView().onError("close cell");
+    }
 }

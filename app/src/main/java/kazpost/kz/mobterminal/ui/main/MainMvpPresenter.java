@@ -26,4 +26,9 @@ import kazpost.kz.mobterminal.ui.base.MvpPresenter;
 @PerActivity
 public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V> {
 
+    void onSortBtnClicked();
+
+    void onConfigPrinterBtnClicked();
+
+    void onCloseCellBtnClicked();
 }
