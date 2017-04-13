@@ -8,9 +8,18 @@
 
 
     <TextView
+        android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/scan_your_code" />
+
+    <EditText
+        android:id="@+id/et_login"
+        android:layout_width="match_parent"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_login"
+        android:hint="@string/login" />
 
     <Button
         android:id="@+id/btn_login_exit"
@@ -19,7 +28,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/white"
         android:background="@color/colorPrimary"
-        android:text="@string/exit" />
+        android:text="@string/exit"
+        android:textColor="@color/white" />
 </RelativeLayout>

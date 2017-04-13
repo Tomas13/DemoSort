@@ -25,4 +25,6 @@ import kazpost.kz.mobterminal.ui.base.MvpView;
 public interface LoginMvpView extends MvpView {
 
     void openMainActivity();
+
+    void showPinEditText();
 }

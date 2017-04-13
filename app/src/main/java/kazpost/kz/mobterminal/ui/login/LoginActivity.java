@@ -2,19 +2,33 @@ package kazpost.kz.mobterminal.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Observable;
 
 import javax.inject.Inject;
 
+import butterknife.BindString;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
-import kazpost.kz.mobterminal.ui.main.MainActivity;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
+import kazpost.kz.mobterminal.ui.main.MainActivity;
 
 public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @Inject
     LoginMvpPresenter<LoginMvpView> mPresenter;
+
+    @BindView(R.id.tv_login)
+    TextView tvLogin;
+    @BindView(R.id.et_login)
+    EditText etLogin;
+    @BindString(R.string.enter_your_pin)
+    String enterPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +55,13 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         Intent intent = MainActivity.getStartIntent(LoginActivity.this);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void showPinEditText() {
+
+        etLogin.setVisibility(View.VISIBLE);
+        tvLogin.setText(enterPin);
     }
 
 
