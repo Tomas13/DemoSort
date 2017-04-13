@@ -13,20 +13,16 @@
  * limitations under the License
  */
 
-package kazpost.kz.mobterminal.ui.base;
+package kazpost.kz.mobterminal.ui.main;
 
+
+import kazpost.kz.mobterminal.ui.base.MvpView;
 
 /**
- * Every presenter in the app must either implement this interface or extend BasePresenter
- * indicating the MvpView type that wants to be attached with.
+ * Created by janisharali on 27/01/17.
  */
-public interface MvpPresenter<V extends MvpView> {
 
-    void onAttach(V mvpView);
+public interface MainMvpView extends MvpView {
 
-    void onDetach();
 
-//    void handleApiError(ANError error);
-
-//    void setUserAsLoggedOut();
 }

@@ -13,20 +13,19 @@
  * limitations under the License
  */
 
-package kazpost.kz.mobterminal.ui.base;
+package kazpost.kz.mobterminal.di;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import javax.inject.Scope;
 
 /**
- * Every presenter in the app must either implement this interface or extend BasePresenter
- * indicating the MvpView type that wants to be attached with.
+ * Created by janisharali on 27/01/17.
  */
-public interface MvpPresenter<V extends MvpView> {
 
-    void onAttach(V mvpView);
-
-    void onDetach();
-
-//    void handleApiError(ANError error);
-
-//    void setUserAsLoggedOut();
+@Scope
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PerService {
 }
+

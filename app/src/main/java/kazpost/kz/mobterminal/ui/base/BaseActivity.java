@@ -3,7 +3,6 @@ package kazpost.kz.mobterminal.ui.base;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
@@ -13,7 +12,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import kazpost.kz.mobterminal.MyApp;
 import kazpost.kz.mobterminal.R;
+import kazpost.kz.mobterminal.di.component.ActivityComponent;
+import kazpost.kz.mobterminal.di.component.DaggerActivityComponent;
+import kazpost.kz.mobterminal.di.module.ActivityModule;
 import kazpost.kz.mobterminal.utils.CommonUtils;
 import kazpost.kz.mobterminal.utils.NetworkUtils;
 
@@ -25,11 +28,19 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     private ProgressDialog mProgressDialog;
 
-//    private ActivityComponent mActivityComponent;
+    private ActivityComponent mActivityComponent;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivityComponent = DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .applicationComponent(((MyApp) getApplication()).getComponent())
+                .build();
+    }
+
+    public ActivityComponent getActivityComponent() {
+        return mActivityComponent;
     }
 
     @Override

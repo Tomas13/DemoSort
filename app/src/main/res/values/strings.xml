@@ -2,5 +2,7 @@
     <string name="app_name">MobTerminal</string>
 
     <string name="some_error">Some Error Occurred!</string>
+    <string name="exit">ВЫХОД</string>
+    <string name="scan_your_code">Отсканируйте свой штрихкод: </string>
 
 </resources>
