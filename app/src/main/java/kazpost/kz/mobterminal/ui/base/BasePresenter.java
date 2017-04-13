@@ -1,13 +1,8 @@
 package kazpost.kz.mobterminal.ui.base;
 
-import android.util.Log;
-
 import javax.inject.Inject;
-import javax.net.ssl.HttpsURLConnection;
 
-import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.data.DataManager;
-import kazpost.kz.mobterminal.utils.AppConstants;
 
 /**
  * Created by root on 4/11/17.

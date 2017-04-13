@@ -20,16 +20,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
 
     @Override
-    public void onAttach(V mvpView) {
-
-    }
-
-    @Override
-    public void onDetach() {
-
-    }
-
-    @Override
     public void onLoginCodeScan() {
 
         getMvpView().openMainActivity();
