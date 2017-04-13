@@ -6,5 +6,6 @@
     <string name="scan_your_code">Отсканируйте свой штрихкод: </string>
     <string name="enter_your_pin">Введите свой Pin-код: </string>
     <string name="login">Логин</string>
+    <string name="enter">войти</string>
 
 </resources>

@@ -61,6 +61,12 @@ public final class CommonUtils {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
+    public static boolean isPinValid(String pinCode){
+        return pinCode.equals("1111");
+    }
+
+
+
     public static boolean isEmailValid(String email) {
         Pattern pattern;
         Matcher matcher;
