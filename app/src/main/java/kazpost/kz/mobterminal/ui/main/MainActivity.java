@@ -1,5 +1,6 @@
 package kazpost.kz.mobterminal.ui.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
+import kazpost.kz.mobterminal.ui.scanner.ScannerActivity;
 
 public class MainActivity extends BaseActivity implements MainMvpView {
 
@@ -43,6 +45,12 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         return intent;
     }
 
+
+    public void startActivity1(Activity activity) {
+        startActivity(new Intent(MainActivity.this,  activity.getClass()));
+    }
+
+
     @Override
     public void openScanActivity() {
 
@@ -63,6 +71,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         switch (view.getId()) {
             case R.id.btn_sort:
                 mPresenter.onSortBtnClicked();
+                startActivity1(new ScannerActivity());
                 break;
             case R.id.btn_close_cell:
                 mPresenter.onCloseCellBtnClicked();

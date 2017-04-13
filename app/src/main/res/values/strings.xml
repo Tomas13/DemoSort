@@ -11,4 +11,8 @@
     <string name="close_cell">закрыть ячейку</string>
     <string name="config_printer">Настройка принтера</string>
 
+    <string name="btnScannerSelectBarcode">Scanner Selection Example</string>
+    <string name="btnSwitchScanners">Switch Scanners</string>
+    <string name="txtBarcodeTitle">Press the device\'s scan button to scan a barcode.</string>
+
 </resources>

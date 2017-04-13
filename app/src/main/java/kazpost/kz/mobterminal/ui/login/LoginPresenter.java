@@ -45,6 +45,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         if (CommonUtils.isPinValid(pinCode)) {
             getMvpView().openMainActivity();
         } else {
+            getMvpView().hideKeyboard();
             getMvpView().onError("Pin not valid");
         }
     }

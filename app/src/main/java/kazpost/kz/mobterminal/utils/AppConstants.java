@@ -10,5 +10,6 @@ public class AppConstants {
 
     public static final String TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
 
+    public static final int ScannerSelectionBarcodeActivity = 1;
 
 }

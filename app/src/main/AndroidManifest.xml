@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kazpost.kz.mobterminal">
 
+    <uses-permission android:name="com.honeywell.decode.permission.DECODE" />
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -11,15 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.main.MainActivity">
-
-        </activity>
-        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.login.LoginActivity">
+
+        </activity>
+
+        <activity android:name=".ui.scanner.ScannerSelectionBarcodeActivity" />
+        <activity android:name=".ui.scanner.ScannerActivity" />
+
     </application>
 
 </manifest>
