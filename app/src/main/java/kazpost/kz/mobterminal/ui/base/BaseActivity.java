@@ -1,7 +1,9 @@
 package kazpost.kz.mobterminal.ui.base;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -11,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import kazpost.kz.mobterminal.MyApp;
 import kazpost.kz.mobterminal.R;
@@ -65,6 +68,11 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         }
     }
 
+    public void startActivity(Activity activity1, Activity activity2){
+        Toast.makeText(activity1, "from base", Toast.LENGTH_SHORT).show();
+        activity1.startActivity(new Intent(activity1, activity2.getClass()));    
+    }
+    
     private void showSnackBar(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);

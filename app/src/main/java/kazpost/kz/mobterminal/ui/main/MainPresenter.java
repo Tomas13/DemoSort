@@ -19,8 +19,7 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
 
     @Override
     public void onSortBtnClicked() {
-        getMvpView().onError("sort");
-
+        getMvpView().openScanActivity();
     }
 
     @Override
