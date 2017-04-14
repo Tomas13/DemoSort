@@ -9,4 +9,6 @@ import kazpost.kz.mobterminal.ui.base.MvpPresenter;
 
 @PerActivity
 public interface CloseCellMvpPresenter<V extends CloseCellMvpView> extends MvpPresenter<V> {
+
+    void openPrintActivity();
 }

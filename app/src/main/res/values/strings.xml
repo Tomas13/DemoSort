@@ -20,6 +20,8 @@
     <string name="enter_seal">Введите номер пломбы</string>
     <string name="enter_weight">Введите вес</string>
     <string name="back">назад</string>
-    <string name="further">далее</string>
+    <string name="next">далее</string>
+    <string name="chose_printer">Выбор принтера</string>
+    <string name="repeat_label_print">повторить печать ярлыка</string>
 
 </resources>

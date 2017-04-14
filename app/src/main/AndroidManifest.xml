@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.MainActivity"></activity>
+        <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,8 @@
         <activity android:name=".ui.scanner.ScannerSelectionBarcodeActivity" />
         <activity android:name=".ui.scanner.ScannerActivity" />
         <activity android:name=".ui.scanner.ScanActivity" />
-        <activity android:name=".ui.closecell.CloseCellActivity"></activity>
+        <activity android:name=".ui.closecell.CloseCellActivity" />
+        <activity android:name=".ui.print.PrintActivity"></activity>
     </application>
 
 </manifest>

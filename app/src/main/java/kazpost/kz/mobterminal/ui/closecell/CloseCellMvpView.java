@@ -7,4 +7,6 @@ import kazpost.kz.mobterminal.ui.base.MvpView;
  */
 
 public interface CloseCellMvpView extends MvpView {
+
+    void openPrintActivity();
 }

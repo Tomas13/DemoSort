@@ -34,7 +34,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         if (CommonUtils.isPinValid(pinCode)) {
             getMvpView().openMainActivity();
         } else {
-            getMvpView().onErrorToast("Pin not valid");
+            getMvpView().onErrorToast("Неверный пин-код");
         }
     }
 

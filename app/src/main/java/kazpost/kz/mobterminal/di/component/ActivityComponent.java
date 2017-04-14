@@ -36,8 +36,8 @@ public interface ActivityComponent {
 
     void inject(LoginActivity activity);
 
-    void inject(ScanActivity activity);
-
     void inject(CloseCellActivity activity);
+
+    void inject(ScanActivity activity);
 
 }
