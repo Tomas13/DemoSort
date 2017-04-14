@@ -15,5 +15,6 @@
     <string name="btnSwitchScanners">Switch Scanners</string>
     <string name="txtBarcodeTitle">Press the device\'s scan button to scan a barcode.</string>
     <string name="scan_package">Сканируйте ШПИ посылки</string>
+    <string name="your_code">ваш штрихкод</string>
 
 </resources>

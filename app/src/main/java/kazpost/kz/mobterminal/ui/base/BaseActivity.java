@@ -10,6 +10,7 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -68,11 +69,20 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         }
     }
 
-    public void startActivity(Activity activity1, Activity activity2){
-        Toast.makeText(activity1, "from base", Toast.LENGTH_SHORT).show();
-        activity1.startActivity(new Intent(activity1, activity2.getClass()));    
+    @Override
+    public void onErrorToast(String msg) {
+        if (msg != null) {
+            showToast(msg);
+        } else {
+            showToast(getString(R.string.some_error));
+        }
     }
-    
+
+
+    public void startActivity(Activity activity1, Activity activity2) {
+        activity1.startActivity(new Intent(activity1, activity2.getClass()));
+    }
+
     private void showSnackBar(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);
@@ -81,6 +91,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
                 .findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
+    }
+
+    private void showToast(String msg) {
+        Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP, 0, 50);
+        toast.setText(msg);
+        toast.show();
     }
 
     @Override
@@ -101,6 +118,16 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    public void showKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, 0);
+        }
+    }
+
 
     @Override
     public void onFragmentAttached() {

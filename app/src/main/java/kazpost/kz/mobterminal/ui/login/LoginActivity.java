@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -13,6 +14,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
@@ -30,6 +32,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     String enterPin;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    @BindView(R.id.et_code)
+    EditText etCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,13 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         getActivityComponent().inject(this);
 
         mPresenter.onAttach(LoginActivity.this);
+    }
+
+
+    @OnTextChanged(R.id.et_code)
+    public void onCodeScanned() {
+//        Toast.makeText(this, etCode.getText(), Toast.LENGTH_SHORT).show();
+
         mPresenter.onLoginCodeScan();
     }
 
@@ -63,7 +74,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @Override
     public void showPinEditText() {
-
+        showKeyboard();
+        etCode.setVisibility(View.INVISIBLE);
         btnLogin.setVisibility(View.VISIBLE);
         etLogin.setVisibility(View.VISIBLE);
         tvLogin.setText(enterPin);

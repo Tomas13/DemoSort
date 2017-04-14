@@ -38,6 +38,8 @@ public interface MvpView {
 
     void onError(String message);
 
+    void onErrorToast(String msg);
+
     boolean isNetworkConnected();
 
     void hideKeyboard();

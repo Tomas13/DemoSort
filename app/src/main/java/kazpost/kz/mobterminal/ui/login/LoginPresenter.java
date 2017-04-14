@@ -1,11 +1,7 @@
 package kazpost.kz.mobterminal.ui.login;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import kazpost.kz.mobterminal.data.DataManager;
 import kazpost.kz.mobterminal.ui.base.BasePresenter;
@@ -25,17 +21,10 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     }
 
 
-    Disposable disposable;
-
     @Override
     public void onLoginCodeScan() {
 
-        getMvpView().showLoading();
-
-        Observable<Long> observable = Observable.interval(2, TimeUnit.SECONDS);
-        disposable = observable
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o -> showPin());
+        showPin();
 
     }
 
@@ -45,16 +34,14 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         if (CommonUtils.isPinValid(pinCode)) {
             getMvpView().openMainActivity();
         } else {
-            getMvpView().hideKeyboard();
-            getMvpView().onError("Pin not valid");
+            getMvpView().onErrorToast("Pin not valid");
         }
     }
 
 
     private void showPin() {
+
         getMvpView().showPinEditText();
-        getMvpView().hideLoading();
-        disposable.dispose();
     }
 
 }
