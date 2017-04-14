@@ -30,6 +30,6 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
 
     @Override
     public void onCloseCellBtnClicked() {
-        getMvpView().onError("close cell");
+        getMvpView().openCloseCellActivity();
     }
 }

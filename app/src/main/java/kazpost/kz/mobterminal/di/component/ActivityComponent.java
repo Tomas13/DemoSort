@@ -19,8 +19,10 @@ package kazpost.kz.mobterminal.di.component;
 import dagger.Component;
 import kazpost.kz.mobterminal.di.PerActivity;
 import kazpost.kz.mobterminal.di.module.ActivityModule;
+import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
 import kazpost.kz.mobterminal.ui.login.LoginActivity;
+import kazpost.kz.mobterminal.ui.scanner.ScanActivity;
 
 /**
  * Created by janisharali on 27/01/17.
@@ -33,5 +35,9 @@ public interface ActivityComponent {
     void inject(MainActivity activity);
 
     void inject(LoginActivity activity);
+
+    void inject(ScanActivity activity);
+
+    void inject(CloseCellActivity activity);
 
 }

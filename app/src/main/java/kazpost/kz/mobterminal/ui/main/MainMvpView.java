@@ -29,5 +29,5 @@ public interface MainMvpView extends MvpView {
 
     void openConfigPrinter();
 
-    void closeCell();
+    void openCloseCellActivity();
 }

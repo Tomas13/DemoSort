@@ -78,6 +78,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         etCode.setVisibility(View.INVISIBLE);
         btnLogin.setVisibility(View.VISIBLE);
         etLogin.setVisibility(View.VISIBLE);
+
+        etLogin.requestFocus();
         tvLogin.setText(enterPin);
     }
 

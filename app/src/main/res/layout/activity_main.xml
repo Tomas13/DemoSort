@@ -14,23 +14,21 @@
 
         <Button
             android:id="@+id/btn_sort"
+            style="@style/BlueButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/colorBlue"
-            android:text="@string/sort"
-            android:textColor="@color/white" />
+            android:text="@string/sort" />
 
         <Button
             android:id="@+id/btn_close_cell"
+            style="@style/BlueButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/colorBlue"
-            android:text="@string/close_cell"
-            android:textColor="@color/white" />
+            android:text="@string/close_cell" />
 
     </LinearLayout>
 
@@ -42,23 +40,21 @@
 
         <Button
             android:id="@+id/btn_config_printer"
+            style="@style/BlueButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/colorBlue"
-            android:text="@string/config_printer"
-            android:textColor="@color/white" />
+            android:text="@string/config_printer" />
 
         <Button
             android:id="@+id/btn_exit"
+            style="@style/BlueButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@color/colorBlue"
-            android:text="@string/exit"
-            android:textColor="@color/white" />
+            android:text="@string/exit" />
 
     </LinearLayout>
 

@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
+import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
 import kazpost.kz.mobterminal.ui.scanner.ScanActivity;
 import kazpost.kz.mobterminal.ui.scanner.ScannerActivity;
 
@@ -56,8 +57,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
-    public void closeCell() {
-
+    public void openCloseCellActivity() {
+        startActivity(this, new CloseCellActivity());
     }
 
     @OnClick({R.id.btn_sort, R.id.btn_close_cell, R.id.btn_config_printer, R.id.btn_exit})

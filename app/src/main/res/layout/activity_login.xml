@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_login"
-        android:hint="@string/your_code"/>
+        android:hint="@string/your_code" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,25 +34,24 @@
             android:visibility="invisible" />
 
         <Button
-            android:visibility="invisible"
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorBlue"
             android:text="@string/enter"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="invisible" />
     </LinearLayout>
 
 
     <Button
         android:id="@+id/btn_login_exit"
+        style="@style/BlueButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@color/colorBlue"
-        android:text="@string/exit"
-        android:textColor="@color/white" />
+        android:text="@string/exit" />
 </RelativeLayout>

@@ -23,12 +23,16 @@ import dagger.Module;
 import dagger.Provides;
 import kazpost.kz.mobterminal.di.ActivityContext;
 import kazpost.kz.mobterminal.di.PerActivity;
+import kazpost.kz.mobterminal.ui.closecell.CloseCellMvpPresenter;
+import kazpost.kz.mobterminal.ui.closecell.CloseCellMvpView;
 import kazpost.kz.mobterminal.ui.login.LoginMvpPresenter;
 import kazpost.kz.mobterminal.ui.login.LoginMvpView;
 import kazpost.kz.mobterminal.ui.login.LoginPresenter;
 import kazpost.kz.mobterminal.ui.main.MainMvpPresenter;
 import kazpost.kz.mobterminal.ui.main.MainMvpView;
 import kazpost.kz.mobterminal.ui.main.MainPresenter;
+import kazpost.kz.mobterminal.ui.scanner.ScanMvpPresenter;
+import kazpost.kz.mobterminal.ui.scanner.ScanMvpView;
 
 /**
  * Created by janisharali on 27/01/17.
@@ -66,6 +70,19 @@ public class ActivityModule {
     @PerActivity
     MainMvpPresenter<MainMvpView> provideMainPresenter(MainPresenter<MainMvpView>
                                                                presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    CloseCellMvpPresenter<CloseCellMvpView> provideCloseCellPresenter(CloseCellMvpPresenter<CloseCellMvpView>
+                                                                              presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ScanMvpPresenter<ScanMvpView> provideScanPresenter(ScanMvpPresenter<ScanMvpView> presenter) {
         return presenter;
     }
 }

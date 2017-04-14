@@ -16,5 +16,10 @@
     <string name="txtBarcodeTitle">Press the device\'s scan button to scan a barcode.</string>
     <string name="scan_package">Сканируйте ШПИ посылки</string>
     <string name="your_code">ваш штрихкод</string>
+    <string name="scan_bag">Сканируйте ШПИ мешка</string>
+    <string name="enter_seal">Введите номер пломбы</string>
+    <string name="enter_weight">Введите вес</string>
+    <string name="back">назад</string>
+    <string name="further">далее</string>
 
 </resources>
