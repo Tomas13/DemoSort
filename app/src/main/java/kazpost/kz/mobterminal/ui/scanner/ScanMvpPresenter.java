@@ -9,4 +9,6 @@ import kazpost.kz.mobterminal.ui.base.MvpPresenter;
 
 @PerActivity
 public interface ScanMvpPresenter<V extends ScanMvpView> extends MvpPresenter<V> {
+
+    void onScan(String number);
 }
