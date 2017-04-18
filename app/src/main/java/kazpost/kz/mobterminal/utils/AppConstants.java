@@ -12,4 +12,6 @@ public class AppConstants {
 
     public static final int ScannerSelectionBarcodeActivity = 1;
 
+    public static final String BASE_URL = "http://172.30.223.25:8088/mobiterminal/Terminal.wsdl/";
+
 }

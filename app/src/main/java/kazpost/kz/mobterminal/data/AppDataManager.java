@@ -5,7 +5,10 @@ import android.content.Context;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Observable;
 import kazpost.kz.mobterminal.data.network.ApiHelper;
+import kazpost.kz.mobterminal.data.network.model.Envelope;
+import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.data.prefs.PreferencesHelper;
 import kazpost.kz.mobterminal.data.realm.RealmHelper;
 import kazpost.kz.mobterminal.di.ApplicationContext;
@@ -21,16 +24,16 @@ public class AppDataManager implements DataManager {
 
     private final Context mContext;
     private final PreferencesHelper mPreferencesHelper;
-//    private final ApiHelper mApiHelper;
+    private final ApiHelper mApiHelper;
 
 
     @Inject
     public AppDataManager(@ApplicationContext Context context,
-                          PreferencesHelper preferencesHelper
-                          ) {
+                          PreferencesHelper preferencesHelper,
+                          ApiHelper apiHelper) {
         mContext = context;
         mPreferencesHelper = preferencesHelper;
-//        mApiHelper = apiHelper;
+        mApiHelper = apiHelper;
     }
 
 
@@ -43,4 +46,8 @@ public class AppDataManager implements DataManager {
         return mPreferencesHelper;
     }
 
+    @Override
+    public rx.Observable<Envelope> doAuthorizeOnServer(RequestEnvelope requestEnvelope) {
+        return mApiHelper.doAuthorizeOnServer(requestEnvelope);
+    }
 }

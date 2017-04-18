@@ -3,6 +3,7 @@
     package="kazpost.kz.mobterminal">
 
     <uses-permission android:name="com.honeywell.decode.permission.DECODE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApp"

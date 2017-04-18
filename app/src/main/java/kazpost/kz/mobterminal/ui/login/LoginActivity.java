@@ -16,6 +16,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import kazpost.kz.mobterminal.R;
+import kazpost.kz.mobterminal.data.network.model.request.AuthRequestBody;
+import kazpost.kz.mobterminal.data.network.model.request.AuthRequestData;
+import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
 
@@ -35,6 +38,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     @BindView(R.id.et_code)
     EditText etCode;
 
+    String userBarcode, userPin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +54,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @OnTextChanged(R.id.et_code)
     public void onCodeScanned() {
+
+        userBarcode = etLogin.getText().toString();
 //        Toast.makeText(this, etCode.getText(), Toast.LENGTH_SHORT).show();
 
+        //show edittext for entering pin
         mPresenter.onLoginCodeScan();
     }
 
@@ -62,7 +70,18 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @OnClick(R.id.btn_login)
     public void onBtnLoginClicked() {
-        mPresenter.onLoginBtnClicked(etLogin.getText().toString());
+
+        userPin = etCode.getText().toString();
+
+        RequestEnvelope requestEnvelope = new RequestEnvelope();
+        AuthRequestBody authRequestBody = new AuthRequestBody();
+        AuthRequestData authRequestData = new AuthRequestData();
+        authRequestData.setUserBarcode(userBarcode);
+        authRequestData.setUserPin(userPin);
+        authRequestBody.setAuthRequestData(authRequestData);
+
+        requestEnvelope.setAuthRequestBody(authRequestBody);
+        mPresenter.onLoginBtnClicked(requestEnvelope);
     }
 
     @Override

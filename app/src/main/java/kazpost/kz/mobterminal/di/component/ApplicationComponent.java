@@ -24,6 +24,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 import kazpost.kz.mobterminal.MyApp;
 import kazpost.kz.mobterminal.data.DataManager;
+import kazpost.kz.mobterminal.data.network.ApiHelper;
+import kazpost.kz.mobterminal.data.network.NetworkService;
 import kazpost.kz.mobterminal.di.ApplicationContext;
 import kazpost.kz.mobterminal.di.module.ApplicationModule;
 
@@ -44,4 +46,6 @@ public interface ApplicationComponent {
     Application application();
 
     DataManager getDataManager();
+
+    NetworkService getNetworkService();
 }

@@ -1,5 +1,6 @@
 package kazpost.kz.mobterminal.ui.login;
 
+import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.di.PerActivity;
 import kazpost.kz.mobterminal.ui.base.MvpPresenter;
 
@@ -12,6 +13,6 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     void onLoginCodeScan();
 
-    void onLoginBtnClicked(String pinCode);
+    void onLoginBtnClicked(RequestEnvelope requestEnvelope);
 
 }
