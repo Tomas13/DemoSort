@@ -4,17 +4,14 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import kazpost.kz.mobterminal.data.DataManager;
 import kazpost.kz.mobterminal.data.network.model.Envelope;
 import kazpost.kz.mobterminal.data.network.model.request.AuthRequestBody;
 import kazpost.kz.mobterminal.data.network.model.request.AuthRequestData;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.ui.base.BasePresenter;
-import kazpost.kz.mobterminal.utils.CommonUtils;
 import rx.Observable;
-import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
@@ -37,31 +34,53 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     }
 
     @Override
-    public void onLoginBtnClicked(RequestEnvelope requestEnvelope) {
+    public void onLoginBtnClicked(String barcode, String pin) {
 
         getMvpView().showLoading();
+
+
+        RequestEnvelope requestEnvelope = new RequestEnvelope();
+        AuthRequestBody authRequestBody = new AuthRequestBody();
+        AuthRequestData authRequestData = new AuthRequestData();
+        authRequestData.setUserBarcode(barcode);
+        authRequestData.setUserPin(pin);
+        authRequestBody.setAuthRequestData(authRequestData);
+
+        requestEnvelope.setAuthRequestBody(authRequestBody);
+
 
         Observable<Envelope> observable = getDataManager().doAuthorizeOnServer(requestEnvelope);
 
         observable
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         envelope -> {
-                            Log.d(TAG, "GEN " + envelope.getBody().getAuthorizeResponse().getResponseInfo().getResponseGenTime());
+                            Envelope.ResponseInfo responseInfo = envelope.getBody().getAuthorizeResponse().getResponseInfo();
+
+
+                            if (responseInfo.getResponseCode().equals("0")) {
+
+                                String responseGenTime = responseInfo.getResponseGenTime();
+                                String sessioId = envelope.getBody().getAuthorizeResponse().getSessionId();
+
+                                getMvpView().onErrorToast(responseGenTime);
+                                Log.d(TAG, "GEN: " + responseGenTime + " sessionID: " + sessioId);
+                            } else {
+                                Log.d(TAG, "throwable " + responseInfo.getResponseText());
+
+                                getMvpView().onErrorToast(responseInfo.getResponseText());
+                            }
+
                             getMvpView().hideLoading();
                         },
                         throwable -> {
                             Log.d(TAG, "throwable " + throwable.getMessage());
+
+                            getMvpView().onErrorToast(throwable.getMessage());
                             getMvpView().hideLoading();
                         });
 
-
-
-        /*if (CommonUtils.isPinValid(requestEnvelope)) {
-            getMvpView().openMainActivity();
-        } else {
-            getMvpView().onErrorToast("Неверный пин-код");
-        }*/
     }
 
 

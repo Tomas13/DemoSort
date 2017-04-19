@@ -13,7 +13,7 @@ import rx.Observable;
 
 public interface NetworkService {
 
-    @POST("/mobiterminal/Terminal.wsdl")
+    @POST("mobiterminal/Terminal.wsdl")
     @Headers("Content-Type: text/xml")
     Observable<Envelope> requestStateInfoObs(@Body RequestEnvelope requestEnvelope);
 

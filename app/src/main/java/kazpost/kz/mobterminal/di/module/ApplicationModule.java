@@ -20,6 +20,8 @@ import android.content.Context;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -106,6 +108,9 @@ public class ApplicationModule {
     OkHttpClient provideOkhttpClient(Cache cache) {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.addNetworkInterceptor(new StethoInterceptor());
+        client.connectTimeout(2, TimeUnit.MINUTES)
+                .writeTimeout(2, TimeUnit.MINUTES)
+                .readTimeout(2, TimeUnit.MINUTES);
         client.cache(cache);
         return client.build();
     }
@@ -117,9 +122,9 @@ public class ApplicationModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-
-                .baseUrl("http://172.30.223.25:8088/mobiterminal/Terminal.wsdl/")
-//                .baseUrl(BASE_URL)
+        
+//                .baseUrl("http://172.30.223.25:8088/mobiterminal/Terminal.wsdl/")
+                .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .build();
 

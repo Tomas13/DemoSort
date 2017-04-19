@@ -5,12 +5,10 @@ import android.content.Context;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Observable;
 import kazpost.kz.mobterminal.data.network.ApiHelper;
 import kazpost.kz.mobterminal.data.network.model.Envelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.data.prefs.PreferencesHelper;
-import kazpost.kz.mobterminal.data.realm.RealmHelper;
 import kazpost.kz.mobterminal.di.ApplicationContext;
 
 /**

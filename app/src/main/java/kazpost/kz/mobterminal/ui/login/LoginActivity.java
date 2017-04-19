@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -16,9 +15,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import kazpost.kz.mobterminal.R;
-import kazpost.kz.mobterminal.data.network.model.request.AuthRequestBody;
-import kazpost.kz.mobterminal.data.network.model.request.AuthRequestData;
-import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
 
@@ -29,8 +25,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @BindView(R.id.tv_login)
     TextView tvLogin;
-    @BindView(R.id.et_login)
-    EditText etLogin;
+    @BindView(R.id.et_pin)
+    EditText etPin;
     @BindString(R.string.enter_your_pin)
     String enterPin;
     @BindView(R.id.btn_login)
@@ -39,6 +35,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     EditText etCode;
 
     String userBarcode, userPin;
+    @BindView(R.id.btn_barcode)
+    Button btnBarcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +50,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     }
 
 
-    @OnTextChanged(R.id.et_code)
-    public void onCodeScanned() {
-
-        userBarcode = etLogin.getText().toString();
-//        Toast.makeText(this, etCode.getText(), Toast.LENGTH_SHORT).show();
-
-        //show edittext for entering pin
+    @OnClick(R.id.btn_barcode)
+    public void onViewClicked() {
+        userBarcode = etCode.getText().toString();
         mPresenter.onLoginCodeScan();
+
     }
 
 
@@ -71,17 +66,14 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     @OnClick(R.id.btn_login)
     public void onBtnLoginClicked() {
 
-        userPin = etCode.getText().toString();
+        userPin = etPin.getText().toString();
 
-        RequestEnvelope requestEnvelope = new RequestEnvelope();
-        AuthRequestBody authRequestBody = new AuthRequestBody();
-        AuthRequestData authRequestData = new AuthRequestData();
-        authRequestData.setUserBarcode(userBarcode);
-        authRequestData.setUserPin(userPin);
-        authRequestBody.setAuthRequestData(authRequestData);
+        if (userBarcode.length() > 0) {
+            mPresenter.onLoginBtnClicked(userBarcode, userPin);
+        } else {
+            onErrorToast(getString(R.string.no_user_barcode));
+        }
 
-        requestEnvelope.setAuthRequestBody(authRequestBody);
-        mPresenter.onLoginBtnClicked(requestEnvelope);
     }
 
     @Override
@@ -95,10 +87,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     public void showPinEditText() {
         showKeyboard();
         etCode.setVisibility(View.INVISIBLE);
+        btnBarcode.setVisibility(View.INVISIBLE);
         btnLogin.setVisibility(View.VISIBLE);
-        etLogin.setVisibility(View.VISIBLE);
+        etPin.setVisibility(View.VISIBLE);
 
-        etLogin.requestFocus();
+        etPin.requestFocus();
         tvLogin.setText(enterPin);
     }
 
@@ -108,4 +101,6 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         mPresenter.onDetach();
         super.onDestroy();
     }
+
+
 }

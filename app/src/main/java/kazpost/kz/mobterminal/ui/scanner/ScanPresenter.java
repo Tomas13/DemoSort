@@ -4,11 +4,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import kazpost.kz.mobterminal.data.DataManager;
 import kazpost.kz.mobterminal.ui.base.BasePresenter;
+import rx.Observable;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by root on 4/17/17.
@@ -21,7 +21,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
         super(dataManager);
     }
 
-    Disposable disposable;
+     Subscription subscription;
 
     @Override
     public void onScan(String number) {
@@ -29,7 +29,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
         getMvpView().showLoading();
 
         Observable<Long> observable = Observable.interval(3, TimeUnit.SECONDS);
-        disposable = observable.observeOn(AndroidSchedulers.mainThread()).subscribe(o -> {
+        subscription = observable.observeOn(AndroidSchedulers.mainThread()).subscribe(o -> {
             showCell(number);
         });
 
@@ -38,6 +38,6 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
     private void showCell(String s) {
         getMvpView().onError(s);
         getMvpView().hideLoading();
-        disposable.dispose();
+        subscription.unsubscribe();
     }
 }
