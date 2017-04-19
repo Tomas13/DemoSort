@@ -5,4 +5,6 @@ package kazpost.kz.mobterminal.data.prefs;
  */
 
 public interface PreferencesHelper {
+
+    void saveSessionId(String sessionId);
 }

@@ -48,4 +48,9 @@ public class AppDataManager implements DataManager {
     public rx.Observable<Envelope> doAuthorizeOnServer(RequestEnvelope requestEnvelope) {
         return mApiHelper.doAuthorizeOnServer(requestEnvelope);
     }
+
+    @Override
+    public void saveSessionId(String sessionId) {
+        mPreferencesHelper.saveSessionId(sessionId);
+    }
 }

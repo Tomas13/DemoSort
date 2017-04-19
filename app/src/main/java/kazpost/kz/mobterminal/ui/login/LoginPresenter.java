@@ -65,7 +65,9 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                                 String sessioId = envelope.getBody().getAuthorizeResponse().getSessionId();
 
                                 getMvpView().onErrorToast(responseGenTime);
-                                Log.d(TAG, "GEN: " + responseGenTime + " sessionID: " + sessioId);
+
+                                getDataManager().saveSessionId(sessioId);
+
                             } else {
                                 Log.d(TAG, "throwable " + responseInfo.getResponseText());
 
