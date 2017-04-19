@@ -68,6 +68,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
                                 getDataManager().saveSessionId(sessioId);
 
+                                getMvpView().openMainActivity();
+
                             } else {
                                 Log.d(TAG, "throwable " + responseInfo.getResponseText());
 

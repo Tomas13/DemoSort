@@ -15,7 +15,6 @@ import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
 import kazpost.kz.mobterminal.ui.scanner.ScanActivity;
-import kazpost.kz.mobterminal.ui.scanner.ScannerActivity;
 
 public class MainActivity extends BaseActivity implements MainMvpView {
 

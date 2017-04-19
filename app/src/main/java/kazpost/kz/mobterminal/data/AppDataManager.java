@@ -7,9 +7,11 @@ import javax.inject.Singleton;
 
 import kazpost.kz.mobterminal.data.network.ApiHelper;
 import kazpost.kz.mobterminal.data.network.model.Envelope;
+import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.data.prefs.PreferencesHelper;
 import kazpost.kz.mobterminal.di.ApplicationContext;
+import rx.Observable;
 
 /**
  * Created by root on 4/12/17.
@@ -50,7 +52,17 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<kazpost.kz.mobterminal.data.network.model.findplan.Envelope> doFindPlan(FindPlanEnvelope findPlanEnvelope) {
+        return mApiHelper.doFindPlan(findPlanEnvelope);
+    }
+
+    @Override
     public void saveSessionId(String sessionId) {
         mPreferencesHelper.saveSessionId(sessionId);
+    }
+
+    @Override
+    public String getSessionId() {
+        return mPreferencesHelper.getSessionId();
     }
 }

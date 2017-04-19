@@ -31,4 +31,9 @@ public class AppPreferencesHelper implements PreferencesHelper {
     public void saveSessionId(String sessionId) {
         mPrefs.edit().putString(PREF_KEY_SESSION_ID, sessionId).apply();
     }
+
+    @Override
+    public String getSessionId() {
+        return mPrefs.getString(PREF_KEY_SESSION_ID, "no_session_id");
+    }
 }

@@ -21,8 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.scanner.ScannerSelectionBarcodeActivity" />
-        <activity android:name=".ui.scanner.ScannerActivity" />
         <activity android:name=".ui.scanner.ScanActivity" />
         <activity android:name=".ui.closecell.CloseCellActivity" />
         <activity android:name=".ui.print.PrintActivity"></activity>

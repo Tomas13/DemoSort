@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import kazpost.kz.mobterminal.data.network.model.Envelope;
+import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import retrofit2.Retrofit;
 import rx.Observable;
@@ -21,6 +22,11 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Observable<Envelope> doAuthorizeOnServer(RequestEnvelope requestEnvelope) {
         return networkService.requestStateInfoObs(requestEnvelope);
+    }
+
+    @Override
+    public Observable<kazpost.kz.mobterminal.data.network.model.findplan.Envelope> doFindPlan(FindPlanEnvelope findPlanEnvelope) {
+        return networkService.findPlanRequest(findPlanEnvelope);
     }
 
     @Inject
