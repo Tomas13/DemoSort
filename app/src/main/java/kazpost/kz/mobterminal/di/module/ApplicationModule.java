@@ -20,6 +20,11 @@ import android.content.Context;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.convert.AnnotationStrategy;
+import org.simpleframework.xml.core.Persister;
+import org.simpleframework.xml.strategy.Strategy;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -119,8 +124,12 @@ public class ApplicationModule {
     @Provides
     @Singleton
     NetworkService provideNetworkService(OkHttpClient okHttpClient) {
+        Strategy strategy = new AnnotationStrategy();
+
+        Serializer serializer = new Persister(strategy);
+
         Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .addConverterFactory(SimpleXmlConverterFactory.create(serializer))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         
 //                .baseUrl("http://172.30.223.25:8088/mobiterminal/Terminal.wsdl/")

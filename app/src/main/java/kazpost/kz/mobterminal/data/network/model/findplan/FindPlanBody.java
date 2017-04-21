@@ -3,8 +3,6 @@ package kazpost.kz.mobterminal.data.network.model.findplan;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-import kazpost.kz.mobterminal.data.network.model.request.AuthRequestData;
-
 /**
  * Created by root on 4/17/17.
  */

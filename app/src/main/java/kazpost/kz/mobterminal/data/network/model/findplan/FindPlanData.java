@@ -4,36 +4,32 @@ package kazpost.kz.mobterminal.data.network.model.findplan;
  * Created by root on 4/19/17.
  */
 
-import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Order;
 import org.simpleframework.xml.Root;
 
-@Root(name = "sch:FindPlanRequest", strict = true)
-@Order(attributes =  {"session"})
+@Root(name = "sch:FindPlanRequest", strict = false)
 public class FindPlanData {
 
 
-    @Element(name = "sch:SessionId", required = true)
-    @Attribute(name = "session")
-    private String sessionId;
+    @Element(name = "sch:SessionId")
+    private String ASessionId;
 
-    @Element(name = "sch:ParcelBarcode", required = true)
-    private String parcelBarcode;
+    @Element(name = "sch:ParcelBarcode")
+    private String BParcelBarcode;
 
-    public String getSessionId() {
-        return sessionId;
+    public String getASessionId() {
+        return ASessionId;
     }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
+    public void setASessionId(String ASessionId) {
+        this.ASessionId = ASessionId;
     }
 
-    public String getParcelBarcode() {
-        return parcelBarcode;
+    public String getBParcelBarcode() {
+        return BParcelBarcode;
     }
 
-    public void setParcelBarcode(String parcelBarcode) {
-        this.parcelBarcode = parcelBarcode;
+    public void setBParcelBarcode(String BParcelBarcode) {
+        this.BParcelBarcode = BParcelBarcode;
     }
 }

@@ -2,8 +2,6 @@ package kazpost.kz.mobterminal.ui.scanner;
 
 import android.util.Log;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
 
 import kazpost.kz.mobterminal.data.DataManager;
@@ -13,7 +11,6 @@ import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanData;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
 import kazpost.kz.mobterminal.ui.base.BasePresenter;
 import rx.Observable;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -42,8 +39,8 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
         FindPlanBody findPlanBody = new FindPlanBody();
         FindPlanData findPlanData = new FindPlanData();
 //        findPlanData.setParcelBarcode(number);
-        findPlanData.setSessionId(getDataManager().getSessionId());
-        findPlanData.setParcelBarcode("RR460877842BY");
+        findPlanData.setASessionId(getDataManager().getSessionId());
+        findPlanData.setBParcelBarcode("RR460877842BY");
 
         findPlanBody.setFindPlanData(findPlanData);
         findPlanEnvelope.setFindPlanBody(findPlanBody);
