@@ -57,10 +57,10 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
                             if (responseInfo.getResponseCode().equals("0")) {
 
-                                String responseGenTime = responseInfo.getResponseGenTime();
+//                                String responseGenTime = responseInfo.getResponseGenTime();
 
-                                getMvpView().onErrorToast(responseGenTime);
-
+                                getMvpView().showBagTrackNumber(envelope.getBody().getFindPlanResponse().getBagBarcode(),
+                                        envelope.getBody().getFindPlanResponse().getBagNumber());
 
                             } else if (responseInfo.getResponseCode().equals("106")) {  //106 - session time expired
 
@@ -80,8 +80,6 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                             getMvpView().onErrorToast(throwable.getMessage());
                             getMvpView().hideLoading();
                         });
-
-
 
 
     }

@@ -1,12 +1,14 @@
 package kazpost.kz.mobterminal.ui.scanner;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
@@ -18,8 +20,23 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     @Inject
     ScanMvpPresenter<ScanMvpView> presenter;
 
+    @BindView(R.id.tv_scan_top)
+    TextView tvScanTop;
+    @BindView(R.id.tv_tracknumber)
+    TextView tvTracknumber;
+    @BindView(R.id.ll_found_plan)
+    LinearLayout llFoundPlan;
+    @BindView(R.id.tv_scan_bag)
+    TextView tvScanBag;
     @BindView(R.id.et_scan_activity)
     EditText etScanActivity;
+
+    @BindString(R.string.cell_tracknumber)
+    String cellTrack;
+    @BindView(R.id.tv_bag_barcode)
+    TextView tvBagBarcode;
+    @BindView(R.id.tv_bag_number)
+    TextView tvBagNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +57,16 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     @Override
     public void clearEditText() {
         etScanActivity.setText("");
+    }
+
+    @Override
+    public void showBagTrackNumber(String bagBarcode, String bagNumber) {
+
+        tvScanTop.setText(cellTrack);
+        llFoundPlan.setVisibility(View.VISIBLE);
+        tvTracknumber.setVisibility(View.VISIBLE);
+
+        tvBagBarcode.setText(bagBarcode);
+        tvBagNumber.setText(bagNumber);
     }
 }
