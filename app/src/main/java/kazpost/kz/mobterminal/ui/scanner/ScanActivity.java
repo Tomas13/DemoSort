@@ -37,6 +37,11 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     TextView tvBagBarcode;
     @BindView(R.id.tv_bag_number)
     TextView tvBagNumber;
+    @BindView(R.id.et_scan_bag_activity)
+    EditText etScanBagActivity;
+
+
+    String mBagBarcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +68,40 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     public void showBagTrackNumber(String bagBarcode, String bagNumber) {
 
         tvScanTop.setText(cellTrack);
+
         llFoundPlan.setVisibility(View.VISIBLE);
         tvTracknumber.setVisibility(View.VISIBLE);
+        etScanBagActivity.setVisibility(View.VISIBLE);
 
+        etScanActivity.setVisibility(View.GONE);
+
+        mBagBarcode = bagBarcode;
+        tvTracknumber.setText(etScanActivity.getText());
         tvBagBarcode.setText(bagBarcode);
         tvBagNumber.setText(bagNumber);
     }
+
+    @Override
+    public void readyForNextScan() {
+        tvScanTop.setText("");
+        llFoundPlan.setVisibility(View.GONE);
+        tvTracknumber.setVisibility(View.GONE);
+        etScanBagActivity.setVisibility(View.GONE);
+        etScanActivity.setVisibility(View.VISIBLE);
+
+
+    }
+
+
+    @OnTextChanged(R.id.et_scan_bag_activity)
+    public void onBagScan(){
+        presenter.onBagScan(etScanActivity.getText().toString(), mBagBarcode);
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.onDetach();
+        super.onDestroy();
+    }
+
 }

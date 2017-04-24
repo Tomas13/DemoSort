@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import kazpost.kz.mobterminal.data.network.ApiHelper;
 import kazpost.kz.mobterminal.data.network.model.Envelope;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
+import kazpost.kz.mobterminal.data.network.model.parcel.ParcelEnvelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.data.prefs.PreferencesHelper;
 import kazpost.kz.mobterminal.di.ApplicationContext;
@@ -54,6 +55,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<kazpost.kz.mobterminal.data.network.model.findplan.Envelope> doFindPlan(FindPlanEnvelope findPlanEnvelope) {
         return mApiHelper.doFindPlan(findPlanEnvelope);
+    }
+
+    @Override
+    public Observable<kazpost.kz.mobterminal.data.network.model.parcel.Envelope> doParcelToBag(ParcelEnvelope parcelEnvelope) {
+        return mApiHelper.doParcelToBag(parcelEnvelope);
     }
 
     @Override

@@ -77,4 +77,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDetach();
+        super.onDestroy();
+    }
+
 }

@@ -11,4 +11,6 @@ import kazpost.kz.mobterminal.ui.base.MvpPresenter;
 public interface ScanMvpPresenter<V extends ScanMvpView> extends MvpPresenter<V> {
 
     void onScan(String number);
+
+    void onBagScan(String parcelBarcode, String bagBarcode);
 }

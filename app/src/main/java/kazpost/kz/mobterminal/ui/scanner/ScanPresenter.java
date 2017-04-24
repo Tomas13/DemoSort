@@ -9,6 +9,9 @@ import kazpost.kz.mobterminal.data.network.model.findplan.Envelope;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanBody;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanData;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
+import kazpost.kz.mobterminal.data.network.model.parcel.ParcelBody;
+import kazpost.kz.mobterminal.data.network.model.parcel.ParcelData;
+import kazpost.kz.mobterminal.data.network.model.parcel.ParcelEnvelope;
 import kazpost.kz.mobterminal.ui.base.BasePresenter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -54,22 +57,25 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                         envelope -> {
                             Envelope.ResponseInfo responseInfo = envelope.getBody().getFindPlanResponse().getResponseInfo();
 
-
-                            if (responseInfo.getResponseCode().equals("0")) {
+                            switch (responseInfo.getResponseCode()) {
+                                case "0":
 
 //                                String responseGenTime = responseInfo.getResponseGenTime();
 
-                                getMvpView().showBagTrackNumber(envelope.getBody().getFindPlanResponse().getBagBarcode(),
-                                        envelope.getBody().getFindPlanResponse().getBagNumber());
+                                    getMvpView().showBagTrackNumber(envelope.getBody().getFindPlanResponse().getBagBarcode(),
+                                            envelope.getBody().getFindPlanResponse().getBagNumber());
 
-                            } else if (responseInfo.getResponseCode().equals("106")) {  //106 - session time expired
+                                    break;
+                                case "106":   //106 - session time expired
 
-                                getMvpView().onErrorToast(responseInfo.getResponseText());
+                                    getMvpView().onErrorToast(responseInfo.getResponseText());
 
-                            } else {
-                                Log.d(TAG, "throwable " + responseInfo.getResponseText());
+                                    break;
+                                default:
+                                    Log.d(TAG, "throwable " + responseInfo.getResponseText());
 
-                                getMvpView().onErrorToast(responseInfo.getResponseText());
+                                    getMvpView().onErrorToast(responseInfo.getResponseText());
+                                    break;
                             }
 
                             getMvpView().hideLoading();
@@ -82,6 +88,62 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                         });
 
 
+    }
+
+    @Override
+    public void onBagScan(String parcelBarcode, String bagBarcode) {
+
+        getMvpView().showLoading();
+
+        ParcelEnvelope parcelEnvelope = new ParcelEnvelope();
+
+        ParcelBody parcelBody = new ParcelBody();
+        ParcelData parcelData = new ParcelData();
+        parcelData.setASessionId(getDataManager().getSessionId());
+        parcelData.setBParcelBarcode("RR460877842BY");
+        parcelData.setCBagBarcode(bagBarcode);
+
+        parcelBody.setParcelData(parcelData);
+        parcelEnvelope.setParcelBody(parcelBody);
+
+        Observable<kazpost.kz.mobterminal.data.network.model.parcel.Envelope> observable = getDataManager().doParcelToBag(parcelEnvelope);
+
+        observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(envelope -> {
+
+                            String responseCode = envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseCode();
+
+                            switch (responseCode) {
+                                case "0":
+
+                                    //success
+                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
+
+                                    getMvpView().readyForNextScan();
+
+                                    break;
+                                case "103":
+                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
+                                    break;
+
+                                case "6":
+                                    //ШПИ уже добавлен в другой документ
+                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
+                                    break;
+                            }
+                            getMvpView().hideLoading();
+
+                        },
+
+
+                        throwable -> {
+
+                            getMvpView().onErrorToast(throwable.getMessage());
+                            getMvpView().hideLoading();
+
+                        });
     }
 
     private void showCell(String s) {

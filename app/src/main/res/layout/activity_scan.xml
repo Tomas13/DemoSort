@@ -21,12 +21,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         android:layout_toRightOf="@id/tv_scan_top"
         android:text="QS270000161KZ"
         android:textColor="@color/colorBlue"
         android:textStyle="bold" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/ll_found_plan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -114,4 +116,15 @@ android:id="@+id/tv_bag_barcode"
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_background"
         android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/et_scan_bag_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_scan_activity"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_text_background"
+        android:visibility="gone" />
+
+
 </RelativeLayout>

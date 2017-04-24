@@ -57,4 +57,11 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
     public void openPrintActivity() {
         startActivity(this, new PrintActivity());
     }
+
+    @Override
+    protected void onDestroy() {
+//        presenter.onDetach();
+        super.onDestroy();
+    }
+
 }
