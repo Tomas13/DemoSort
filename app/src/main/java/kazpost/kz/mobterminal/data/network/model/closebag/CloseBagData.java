@@ -21,7 +21,7 @@ public class CloseBagData {
     private String CSealNumber;
 
     @Element(name = "sch:Weight")
-    private int DWeight;
+    private String DWeight;
 
 
     public String getCSealNumber() {
@@ -32,11 +32,11 @@ public class CloseBagData {
         this.CSealNumber = CSealNumber;
     }
 
-    public int getDWeight() {
+    public String getDWeight() {
         return DWeight;
     }
 
-    public void setDWeight(int DWeight) {
+    public void setDWeight(String DWeight) {
         this.DWeight = DWeight;
     }
 

@@ -56,7 +56,9 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
 
     @OnTextChanged(R.id.et_scan_activity)
     public void onScan() {
-        presenter.onScan(etScanActivity.getText().toString());
+        //TODO check later if шпи is always 13 digits
+        if (etScanActivity.getText().toString().length() == 13)
+            presenter.onScan(etScanActivity.getText().toString());
     }
 
     @Override
@@ -94,7 +96,7 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
 
 
     @OnTextChanged(R.id.et_scan_bag_activity)
-    public void onBagScan(){
+    public void onBagScan() {
         presenter.onBagScan(etScanActivity.getText().toString(), mBagBarcode);
     }
 

@@ -22,6 +22,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_g_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Номер G накладной: G20170203001524"
@@ -29,6 +30,7 @@
 
 
             <TextView
+                android:id="@+id/tv_seal_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Номер пломбы: 1954928"
@@ -36,6 +38,7 @@
 
 
             <TextView
+                android:id="@+id/tv_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Вес мешка: 0,56кг"
@@ -43,6 +46,7 @@
 
 
             <TextView
+                android:id="@+id/tv_operator_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ФИО оператора: Камеева Гульсара Канаевна"
@@ -59,18 +63,21 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_close_bag_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Время закрытия мешка: 02.02.2017 10:52:16"
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/tv_to_dep_index"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Индекс пункта назначения: [050054]"
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/tv_to_dep_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Название пункта назначения: Алматы-54"

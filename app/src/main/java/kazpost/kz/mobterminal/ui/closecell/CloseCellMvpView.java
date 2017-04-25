@@ -1,5 +1,7 @@
 package kazpost.kz.mobterminal.ui.closecell;
 
+import android.os.Bundle;
+
 import kazpost.kz.mobterminal.ui.base.MvpView;
 
 /**
@@ -8,5 +10,5 @@ import kazpost.kz.mobterminal.ui.base.MvpView;
 
 public interface CloseCellMvpView extends MvpView {
 
-    void openPrintActivity();
+    void openPrintActivity(Bundle bundle);
 }

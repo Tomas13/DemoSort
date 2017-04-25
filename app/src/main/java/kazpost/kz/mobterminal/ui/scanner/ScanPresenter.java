@@ -41,9 +41,9 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
         FindPlanBody findPlanBody = new FindPlanBody();
         FindPlanData findPlanData = new FindPlanData();
-//        findPlanData.setParcelBarcode(number);
+        findPlanData.setBParcelBarcode(number);
         findPlanData.setASessionId(getDataManager().getSessionId());
-        findPlanData.setBParcelBarcode("RR460877842BY");
+//        findPlanData.setBParcelBarcode("RR460877842BY");
 
         findPlanBody.setFindPlanData(findPlanData);
         findPlanEnvelope.setFindPlanBody(findPlanBody);
@@ -100,7 +100,8 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
         ParcelBody parcelBody = new ParcelBody();
         ParcelData parcelData = new ParcelData();
         parcelData.setASessionId(getDataManager().getSessionId());
-        parcelData.setBParcelBarcode("RR460877842BY");
+//        parcelData.setBParcelBarcode("RR460877842BY");
+        parcelData.setBParcelBarcode(parcelBarcode);
         parcelData.setCBagBarcode(bagBarcode);
 
         parcelBody.setParcelData(parcelData);
@@ -120,6 +121,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
                                     //success
                                     getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
+
 
                                     getMvpView().readyForNextScan();
 

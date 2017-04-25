@@ -83,6 +83,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         activity1.startActivity(new Intent(activity1, activity2.getClass()));
     }
 
+
     private void showSnackBar(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);

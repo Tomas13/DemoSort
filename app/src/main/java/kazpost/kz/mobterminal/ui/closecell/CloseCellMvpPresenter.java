@@ -12,5 +12,5 @@ public interface CloseCellMvpPresenter<V extends CloseCellMvpView> extends MvpPr
 
     void openPrintActivity();
 
-    void closeBagRequest(String bagBar, String sealNum, int weight);
+    void closeBagRequest(String bagBar, String sealNum, String weight);
 }

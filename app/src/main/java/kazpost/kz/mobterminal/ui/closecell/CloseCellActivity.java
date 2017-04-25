@@ -1,5 +1,6 @@
 package kazpost.kz.mobterminal.ui.closecell;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.print.PrintActivity;
+
+import static kazpost.kz.mobterminal.utils.AppConstants.PRINT_ACTIVITY;
 
 public class CloseCellActivity extends BaseActivity implements CloseCellMvpView {
 
@@ -56,16 +59,20 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
                 String wei = etWeight.getText().toString();
                 int weight = Integer.parseInt(wei);
 
-                presenter.closeBagRequest(bagBarcode, sealNumber, weight);
-//                startActivity(this, new PrintActivity());
-//                presenter.openPrintActivity();
+                presenter.closeBagRequest(bagBarcode, sealNumber, wei);
+
+
                 break;
         }
     }
 
     @Override
-    public void openPrintActivity() {
-        startActivity(this, new PrintActivity());
+    public void openPrintActivity(Bundle bundle) {
+
+        Intent intent = new Intent(this, PrintActivity.class);
+        intent.putExtra(PRINT_ACTIVITY, bundle);
+
+        startActivity(intent);
     }
 
     @Override
