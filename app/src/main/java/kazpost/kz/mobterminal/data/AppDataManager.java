@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import kazpost.kz.mobterminal.data.network.ApiHelper;
 import kazpost.kz.mobterminal.data.network.model.Envelope;
+import kazpost.kz.mobterminal.data.network.model.closebag.CloseBagEnvelope;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
 import kazpost.kz.mobterminal.data.network.model.parcel.ParcelEnvelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
@@ -60,6 +61,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<kazpost.kz.mobterminal.data.network.model.parcel.Envelope> doParcelToBag(ParcelEnvelope parcelEnvelope) {
         return mApiHelper.doParcelToBag(parcelEnvelope);
+    }
+
+    @Override
+    public Observable<kazpost.kz.mobterminal.data.network.model.closebag.Envelope> doCloseBag(CloseBagEnvelope closeBagEnvelope) {
+        return mApiHelper.doCloseBag(closeBagEnvelope);
     }
 
     @Override

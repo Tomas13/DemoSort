@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -16,8 +17,8 @@ import kazpost.kz.mobterminal.ui.print.PrintActivity;
 
 public class CloseCellActivity extends BaseActivity implements CloseCellMvpView {
 
-//    @Inject
-//    CloseCellMvpPresenter<CloseCellMvpView> presenter;
+    @Inject
+    CloseCellMvpPresenter<CloseCellMvpView> presenter;
 
     @BindView(R.id.et_code_bag)
     EditText etCodeBag;
@@ -36,8 +37,8 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
         setContentView(R.layout.activity_close_cell);
         ButterKnife.bind(this);
 
-//        getActivityComponent().inject(this);
-//        presenter.onAttach(CloseCellActivity.this);
+        getActivityComponent().inject(this);
+        presenter.onAttach(CloseCellActivity.this);
     }
 
     @OnClick({R.id.btn_back_closecell, R.id.btn_next_closecell})
@@ -47,7 +48,16 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
                 super.onBackPressed();
                 break;
             case R.id.btn_next_closecell:
-                startActivity(this, new PrintActivity());
+
+                String bagBarcode = etCodeBag.getText().toString();
+                String sealNumber = etNumberSeal.getText().toString();
+                Toast.makeText(this, etWeight.getText(), Toast.LENGTH_SHORT).show();
+
+                String wei = etWeight.getText().toString();
+                int weight = Integer.parseInt(wei);
+
+                presenter.closeBagRequest(bagBarcode, sealNumber, weight);
+//                startActivity(this, new PrintActivity());
 //                presenter.openPrintActivity();
                 break;
         }
@@ -60,7 +70,7 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
 
     @Override
     protected void onDestroy() {
-//        presenter.onDetach();
+        presenter.onDetach();
         super.onDestroy();
     }
 

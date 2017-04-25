@@ -1,6 +1,7 @@
 package kazpost.kz.mobterminal.data.network;
 
 import kazpost.kz.mobterminal.data.network.model.Envelope;
+import kazpost.kz.mobterminal.data.network.model.closebag.CloseBagEnvelope;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
 import kazpost.kz.mobterminal.data.network.model.parcel.ParcelEnvelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
@@ -27,5 +28,9 @@ public interface NetworkService {
     @POST("mobiterminal/Terminal.wsdl")
     @Headers("Content-Type: text/xml")
     Observable<kazpost.kz.mobterminal.data.network.model.parcel.Envelope> parcelToBagRequest(@Body ParcelEnvelope parcelEnvelope);
+
+    @POST("mobiterminal/Terminal.wsdl")
+    @Headers("Content-Type: text/xml")
+    Observable<kazpost.kz.mobterminal.data.network.model.closebag.Envelope> closeBagRequest(@Body CloseBagEnvelope closeBagEnvelope);
 
 }
