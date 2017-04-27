@@ -1,6 +1,7 @@
 package kazpost.kz.mobterminal.ui.scanner;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -56,6 +57,7 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
 
     @OnTextChanged(R.id.et_scan_activity)
     public void onScan() {
+        Log.d("ScanAc", " onScan called");
         //TODO check later if шпи is always 13 digits
         if (etScanActivity.getText().toString().length() == 13)
             presenter.onScan(etScanActivity.getText().toString());

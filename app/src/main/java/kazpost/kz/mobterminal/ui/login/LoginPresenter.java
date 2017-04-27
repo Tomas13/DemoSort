@@ -2,6 +2,12 @@ package kazpost.kz.mobterminal.ui.login;
 
 import android.util.Log;
 
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import kazpost.kz.mobterminal.data.DataManager;
@@ -64,7 +70,19 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                                 String responseGenTime = responseInfo.getResponseGenTime();
                                 String sessioId = envelope.getBody().getAuthorizeResponse().getSessionId();
 
-                                getMvpView().onErrorToast(responseGenTime);
+//                                2017-01-12T17:39:50.996+06:00
+
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+
+                                Date date = new Date();
+                                try {
+                                    date= formatter.parse(responseGenTime);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                getMvpView().onErrorToast(date.getYear() + "");
 
                                 getDataManager().saveSessionId(sessioId);
 
