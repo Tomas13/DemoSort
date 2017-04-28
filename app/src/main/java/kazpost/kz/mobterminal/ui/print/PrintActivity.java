@@ -2,11 +2,19 @@ package kazpost.kz.mobterminal.ui.print;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import kazpost.kz.mobterminal.R;
@@ -52,6 +60,21 @@ public class PrintActivity extends AppCompatActivity {
     @BindView(R.id.ll_print_buttons)
     LinearLayout llPrintButtons;
 
+    @BindString(R.string.g_number)
+    String gNumberTitle;
+    @BindString(R.string.seal_number)
+    String sealNumberTitle;
+    @BindString(R.string.bag_weight)
+    String weightTitle;
+    @BindString(R.string.operator_name)
+    String operatorTitle;
+    @BindString(R.string.to_dep_index)
+    String toDepIndexTitle;
+    @BindString(R.string.to_dep_name)
+    String toDepNameTitle;
+    @BindString(R.string.bag_close_time)
+    String closeTimeTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,23 +83,43 @@ public class PrintActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getBundleExtra(PRINT_ACTIVITY);
 
-        String gNumber = bundle.getString(G_NUMBER, "gNumber");
-        String sealNumber = bundle.getString(SEAL_NUMBER, "sealNumber");
-        String weightResponse = bundle.getString(WEIGHT_RESPONSE, "weightResponse");
-        String fromDep = bundle.getString(FROM_DEP, "fromDep");
-        String toDep = bundle.getString(TO_DEP, "toDep");
-        String sendMethod = bundle.getString(SEND_METHOD, "sendMethod");
-        String bagType = bundle.getString(BAG_TYPE, "bagType");
-        String operatorName = bundle.getString(OPERATOR_NAME, "operatorName");
-        String closeTime = bundle.getString(CLOSE_BAG_TIME, "00:00");
+
+        if (bundle != null) {
+            String gNumber = bundle.getString(G_NUMBER, "G000000000");
+            String sealNumber = bundle.getString(SEAL_NUMBER, "00000");
+            String weightResponse = bundle.getString(WEIGHT_RESPONSE, "0");
+            String fromDep = bundle.getString(FROM_DEP, "fromDep");
+            String toDep = bundle.getString(TO_DEP, "toDep");
+            String sendMethod = bundle.getString(SEND_METHOD, "sendMethod");
+            String bagType = bundle.getString(BAG_TYPE, "bagType");
+            String operatorName = bundle.getString(OPERATOR_NAME, "operatorName");
+            String closeTime = bundle.getString(CLOSE_BAG_TIME, "00:00");
+            String date2 = "date";
+
+            SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+            try {
+                Date date = formatter3.parse(closeTime);
+
+                SimpleDateFormat formatter2 = new SimpleDateFormat("dd.MM.yyyy 'в' HH:mm:ss", Locale.US);
+                date2 = formatter2.format(date);
+
+//                Toast.makeText(this, date2.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("PrintActivity: ", date2);
+
+            } catch (ParseException e) {
+                Log.d("PrintActivity: ", e.toString());
+
+            }
 
 
-        tvGNumber.setText(gNumber);
-        tvSealNumber.setText(sealNumber);
-        tvWeight.setText(weightResponse);
-        tvToDepIndex.setText(toDep);
-        tvToDepName.setText(toDep);
-        tvCloseBagTime.setText(closeTime);
-        tvOperatorName.setText(operatorName);
+            tvGNumber.setText(gNumberTitle + " " + gNumber);
+            tvSealNumber.setText(sealNumberTitle + " " + sealNumber);
+            tvWeight.setText(weightTitle + " " + weightResponse);
+//            tvToDepIndex.setText(toDepIndexTitle + " " + toDep);
+            tvToDepName.setText(toDepNameTitle + " " + toDep);
+            tvCloseBagTime.setText(closeTimeTitle + " " + date2);
+            tvOperatorName.setText(operatorTitle + " " + operatorName);
+
+        }
     }
 }

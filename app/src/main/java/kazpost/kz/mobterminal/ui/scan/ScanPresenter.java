@@ -1,4 +1,4 @@
-package kazpost.kz.mobterminal.ui.scanner;
+package kazpost.kz.mobterminal.ui.scan;
 
 import android.util.Log;
 
@@ -148,8 +148,4 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                         });
     }
 
-    private void showCell(String s) {
-        getMvpView().onError(s);
-        getMvpView().hideLoading();
-    }
 }

@@ -30,4 +30,11 @@
     <string name="cell_number">Номер ячейки</string>
     <string name="scan_cell">Отсканируйте ШПИ ячейки</string>
 
+    <string name="g_number">Номер G-накладной:</string>
+    <string name="seal_number">Номер пломбы:</string>
+    <string name="bag_weight">Вес мешка:</string>
+    <string name="operator_name">ФИО оператора:</string>
+    <string name="bag_close_time">Время закрытия мешка:</string>
+    <string name="to_dep_index">Индекс пункта назначения:</string>
+    <string name="to_dep_name">Название пункта назначения:</string>
 </resources>

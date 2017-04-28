@@ -1,4 +1,4 @@
-package kazpost.kz.mobterminal.ui.scanner;
+package kazpost.kz.mobterminal.ui.scan;
 
 import android.os.Bundle;
 import android.util.Log;

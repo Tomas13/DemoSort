@@ -11,4 +11,7 @@ import kazpost.kz.mobterminal.ui.base.MvpView;
 public interface CloseCellMvpView extends MvpView {
 
     void openPrintActivity(Bundle bundle);
+
+    void startLoginActivity();
+
 }

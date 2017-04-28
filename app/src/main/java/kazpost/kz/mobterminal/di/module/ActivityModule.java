@@ -31,9 +31,9 @@ import kazpost.kz.mobterminal.ui.login.LoginPresenter;
 import kazpost.kz.mobterminal.ui.main.MainMvpPresenter;
 import kazpost.kz.mobterminal.ui.main.MainMvpView;
 import kazpost.kz.mobterminal.ui.main.MainPresenter;
-import kazpost.kz.mobterminal.ui.scanner.ScanMvpPresenter;
-import kazpost.kz.mobterminal.ui.scanner.ScanMvpView;
-import kazpost.kz.mobterminal.ui.scanner.ScanPresenter;
+import kazpost.kz.mobterminal.ui.scan.ScanMvpPresenter;
+import kazpost.kz.mobterminal.ui.scan.ScanMvpView;
+import kazpost.kz.mobterminal.ui.scan.ScanPresenter;
 
 /**
  * Created by janisharali on 27/01/17.

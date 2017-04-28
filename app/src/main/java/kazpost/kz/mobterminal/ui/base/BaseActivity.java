@@ -21,6 +21,7 @@ import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.di.component.ActivityComponent;
 import kazpost.kz.mobterminal.di.component.DaggerActivityComponent;
 import kazpost.kz.mobterminal.di.module.ActivityModule;
+import kazpost.kz.mobterminal.ui.login.LoginActivity;
 import kazpost.kz.mobterminal.utils.CommonUtils;
 import kazpost.kz.mobterminal.utils.NetworkUtils;
 
@@ -81,6 +82,10 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     public void startActivity(Activity activity1, Activity activity2) {
         activity1.startActivity(new Intent(activity1, activity2.getClass()));
+    }
+
+    public void startLoginActivity(Activity activity){
+        activity.startActivity(new Intent(activity, LoginActivity.class));
     }
 
 

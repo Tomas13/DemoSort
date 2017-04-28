@@ -47,6 +47,21 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
 
         getMvpView().showLoading();
 
+       /* Bundle bundle = new Bundle();
+        bundle.putString(G_NUMBER, "G201704250001179");
+        bundle.putString(SEAL_NUMBER, "1223");
+        bundle.putString(WEIGHT_RESPONSE, "1");
+        bundle.putString(FROM_DEP, "Участок мжд. почты г.Алматы [220096]");
+        bundle.putString(TO_DEP, "Участок МЖД и ПК г. Астана [220081]");
+        bundle.putString(SEND_METHOD, "Наземный");
+        bundle.putString(BAG_TYPE, "Мешок \"Сақтандыру\"");
+        bundle.putString(OPERATOR_NAME, "Новосельцева Евгения");
+        bundle.putString(CLOSE_BAG_TIME, "2017-01-12T17:39:50.996+06:00");
+
+        getMvpView().openPrintActivity(bundle);
+        getMvpView().hideLoading();*/
+
+
         CloseBagEnvelope closeBagEnvelope = createBagEnvelope(bagBar, sealNum, weight);
 
         Observable<Envelope> observable = getDataManager().doCloseBag(closeBagEnvelope);
@@ -63,18 +78,29 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
 
                                     Envelope.CloseBagResponse closeBagResponse = envelope.getBody().getCloseBagResponse();
                                     getMvpView().openPrintActivity(createBundle(closeBagResponse));
-
                                     break;
 
                                 case "301"://Б накладная не создана
                                     getMvpView().onErrorToast(text);
-
                                     break;
 
+                                case "103": //User not authorized
+                                    getMvpView().onErrorToast(text);
+                                    getMvpView().startLoginActivity();
+                                    break;
+
+                                case "106": //Session expired
+                                    getMvpView().onErrorToast(text);
+                                    getMvpView().startLoginActivity();
+                                    break;
+
+                                case "300": //bag not found
+                                    getMvpView().onErrorToast(text);
+                                    break;
                             }
 
 
-                            getMvpView().onErrorToast(text);
+//                            getMvpView().onErrorToast(text);
 
                             getMvpView().hideLoading();
                         },

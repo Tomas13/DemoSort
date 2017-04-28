@@ -22,7 +22,7 @@ import kazpost.kz.mobterminal.di.module.ActivityModule;
 import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
 import kazpost.kz.mobterminal.ui.login.LoginActivity;
-import kazpost.kz.mobterminal.ui.scanner.ScanActivity;
+import kazpost.kz.mobterminal.ui.scan.ScanActivity;
 
 /**
  * Created by janisharali on 27/01/17.

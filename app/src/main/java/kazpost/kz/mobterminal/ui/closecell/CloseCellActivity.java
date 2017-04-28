@@ -54,10 +54,11 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
 
                 String bagBarcode = etCodeBag.getText().toString();
                 String sealNumber = etNumberSeal.getText().toString();
-                Toast.makeText(this, etWeight.getText(), Toast.LENGTH_SHORT).show();
 
-                String wei = etWeight.getText().toString();
-                int weight = Integer.parseInt(wei);
+                String wei = "weight";
+                if (etWeight.getText().length() != 0){
+                    wei = etWeight.getText().toString();
+                }
 
                 presenter.closeBagRequest(bagBarcode, sealNumber, wei);
 
@@ -73,6 +74,11 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
         intent.putExtra(PRINT_ACTIVITY, bundle);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void startLoginActivity() {
+        startLoginActivity(this);
     }
 
     @Override
