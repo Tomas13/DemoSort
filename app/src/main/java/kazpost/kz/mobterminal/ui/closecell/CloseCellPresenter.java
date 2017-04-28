@@ -97,10 +97,12 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
                                 case "300": //bag not found
                                     getMvpView().onErrorToast(text);
                                     break;
+
+                                default:
+                                    getMvpView().onErrorToast(text);
+                                    break;
                             }
 
-
-//                            getMvpView().onErrorToast(text);
 
                             getMvpView().hideLoading();
                         },
