@@ -61,7 +61,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
                             if (responseInfo.getResponseCode().equals("0")) {
 
-                                String responseGenTime = responseInfo.getResponseGenTime();
+//                                String responseGenTime = responseInfo.getResponseGenTime();
                                 String sessioId = envelope.getBody().getAuthorizeResponse().getSessionId();
 
                                 getDataManager().saveSessionId(sessioId);

@@ -13,4 +13,7 @@ public interface ScanMvpView extends MvpView {
     void showBagTrackNumber(String bagBarcode, String bagNumber);
 
     void readyForNextScan();
+
+    void startLoginActivity();
+
 }

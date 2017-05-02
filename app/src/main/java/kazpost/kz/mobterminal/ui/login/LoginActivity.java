@@ -68,11 +68,20 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
         userPin = etPin.getText().toString();
 
+        if (userPin.length() == 4) {
+            mPresenter.onLoginBtnClicked(userBarcode, userPin);
+        }else{
+            onErrorToast(getString(R.string.pin_length));
+        }
+
+
+/*
         if (userBarcode.length() > 0) {
             mPresenter.onLoginBtnClicked(userBarcode, userPin);
         } else {
             onErrorToast(getString(R.string.no_user_barcode));
         }
+*/
 
     }
 

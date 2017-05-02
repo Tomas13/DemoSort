@@ -37,4 +37,5 @@
     <string name="bag_close_time">Время закрытия мешка:</string>
     <string name="to_dep_index">Индекс пункта назначения:</string>
     <string name="to_dep_name">Название пункта назначения:</string>
+    <string name="pin_length">Пин-код должен состоять из 4-х символов</string>
 </resources>

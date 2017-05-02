@@ -56,6 +56,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                 .subscribe(
                         envelope -> {
                             Envelope.ResponseInfo responseInfo = envelope.getBody().getFindPlanResponse().getResponseInfo();
+                            String text = envelope.getBody().getFindPlanResponse().getResponseInfo().getResponseText();
 
                             switch (responseInfo.getResponseCode()) {
                                 case "0":
@@ -66,11 +67,18 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                             envelope.getBody().getFindPlanResponse().getBagNumber());
 
                                     break;
-                                case "106":   //106 - session time expired
 
-                                    getMvpView().onErrorToast(responseInfo.getResponseText());
-
+                                case "103": //User not authorized
+                                    getMvpView().onErrorToast(text);
+                                    getMvpView().startLoginActivity();
                                     break;
+
+                                case "106": //Session expired
+                                    getMvpView().onErrorToast(text);
+                                    getMvpView().startLoginActivity();
+                                    break;
+
+
                                 default:
                                     Log.d(TAG, "throwable " + responseInfo.getResponseText());
 
@@ -115,6 +123,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                 .subscribe(envelope -> {
 
                             String responseCode = envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseCode();
+                            String text = envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText();
 
                             switch (responseCode) {
                                 case "0":
@@ -122,17 +131,25 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                     //success
                                     getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
 
-
                                     getMvpView().readyForNextScan();
 
                                     break;
-                                case "103":
-                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
+
+                                case "103": //User not authorized
+                                    getMvpView().onErrorToast(text);
+                                    getMvpView().startLoginActivity();
+                                    break;
+
+                                case "106": //Session expired
+                                    getMvpView().onErrorToast(text);
+                                    getMvpView().startLoginActivity();
                                     break;
 
                                 case "6":
                                     //ШПИ уже добавлен в другой документ
                                     getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
+                                    getMvpView().readyForNextScan();
+
                                     break;
                             }
                             getMvpView().hideLoading();

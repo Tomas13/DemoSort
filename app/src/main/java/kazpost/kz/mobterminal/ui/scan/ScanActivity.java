@@ -42,6 +42,8 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     EditText etScanBagActivity;
 
 
+    @BindString(R.string.scan_package)
+    String scanPackage;
     String mBagBarcode;
 
     @Override
@@ -58,7 +60,6 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     @OnTextChanged(R.id.et_scan_activity)
     public void onScan() {
         Log.d("ScanAc", " onScan called");
-        //TODO check later if шпи is always 13 digits
         if (etScanActivity.getText().toString().length() == 13)
             presenter.onScan(etScanActivity.getText().toString());
     }
@@ -88,6 +89,10 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     @Override
     public void readyForNextScan() {
         tvScanTop.setText("");
+        tvScanTop.setText(scanPackage);
+
+        etScanActivity.setText("");
+        etScanBagActivity.setText("");
         llFoundPlan.setVisibility(View.GONE);
         tvTracknumber.setVisibility(View.GONE);
         etScanBagActivity.setVisibility(View.GONE);
@@ -96,10 +101,16 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
 
     }
 
+    @Override
+    public void startLoginActivity() {
+        startLoginActivity(this);
+    }
+
 
     @OnTextChanged(R.id.et_scan_bag_activity)
     public void onBagScan() {
-        presenter.onBagScan(etScanActivity.getText().toString(), mBagBarcode);
+        if (etScanBagActivity.getText().toString().length() > 0)
+            presenter.onBagScan(etScanActivity.getText().toString(), mBagBarcode);
     }
 
     @Override
