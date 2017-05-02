@@ -42,6 +42,9 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((MyApp) getApplication()).getComponent())
                 .build();
+
+        if (getSupportActionBar() != null)
+            getSupportActionBar().hide();
     }
 
     public ActivityComponent getActivityComponent() {

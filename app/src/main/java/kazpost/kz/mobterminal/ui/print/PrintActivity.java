@@ -18,6 +18,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import kazpost.kz.mobterminal.R;
+import kazpost.kz.mobterminal.ui.base.BaseActivity;
 
 import static kazpost.kz.mobterminal.utils.AppConstants.BAG_TYPE;
 import static kazpost.kz.mobterminal.utils.AppConstants.CLOSE_BAG_TIME;
@@ -30,7 +31,7 @@ import static kazpost.kz.mobterminal.utils.AppConstants.SEND_METHOD;
 import static kazpost.kz.mobterminal.utils.AppConstants.TO_DEP;
 import static kazpost.kz.mobterminal.utils.AppConstants.WEIGHT_RESPONSE;
 
-public class PrintActivity extends AppCompatActivity {
+public class PrintActivity extends BaseActivity {
 
 
     @BindView(R.id.tv_g_number)

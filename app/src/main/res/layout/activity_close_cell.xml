@@ -18,6 +18,7 @@
             android:text="@string/scan_bag" />
 
         <EditText
+            android:imeOptions="flagNoFullscreen"
             android:id="@+id/et_code_bag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,6 +34,7 @@
 
         <EditText
             android:id="@+id/et_number_seal"
+            android:imeOptions="flagNoFullscreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -47,6 +49,7 @@
             android:text="@string/enter_weight" />
 
         <EditText
+            android:imeOptions="flagNoFullscreen"
             android:id="@+id/et_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
