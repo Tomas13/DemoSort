@@ -16,9 +16,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+
 import kazpost.kz.mobterminal.MyApp;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.di.component.ActivityComponent;
+import kazpost.kz.mobterminal.di.component.ConfigPersistentComponent;
 import kazpost.kz.mobterminal.di.component.DaggerActivityComponent;
 import kazpost.kz.mobterminal.di.module.ActivityModule;
 import kazpost.kz.mobterminal.ui.login.LoginActivity;
@@ -35,14 +40,36 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     private ActivityComponent mActivityComponent;
 
+    private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
+    private static final AtomicLong NEXT_ID = new AtomicLong(0);
+    private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
+    private long mActivityId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
+        // being called after a configuration change.
+     /*   mActivityId = savedInstanceState != null ?
+                savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
+        ConfigPersistentComponent configPersistentComponent;
+        if (!sComponentsMap.containsKey(mActivityId)) {
+            configPersistentComponent = DaggerConfigPersistentComponent.builder()
+                    .applicationComponent(MyApp.get(this).getComponent())
+                    .build();
+            sComponentsMap.put(mActivityId, configPersistentComponent);
+        } else {
+            configPersistentComponent = sComponentsMap.get(mActivityId);
+        }
+        mActivityComponent = configPersistentComponent.activityComponent(new ActivityModule(this));
+*/
+
+
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((MyApp) getApplication()).getComponent())
                 .build();
-
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
     }
@@ -148,5 +175,22 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(KEY_ACTIVITY_ID, mActivityId);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (!isChangingConfigurations()) {
+            sComponentsMap.remove(mActivityId);
+        }
+        super.onDestroy();
+    }
+
+    public ActivityComponent activityComponent() {
+        return mActivityComponent;
+    }
 
 }

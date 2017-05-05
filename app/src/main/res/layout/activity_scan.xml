@@ -109,6 +109,7 @@
         android:textAlignment="center" />
 
     <EditText
+        android:imeOptions="flagNoFullscreen"
         android:id="@+id/et_scan_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,6 +120,7 @@
 
     <EditText
         android:id="@+id/et_scan_bag_activity"
+        android:imeOptions="flagNoFullscreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_scan_activity"

@@ -17,6 +17,7 @@ package kazpost.kz.mobterminal.di.component;
 
 
 import dagger.Component;
+import dagger.Subcomponent;
 import kazpost.kz.mobterminal.di.PerActivity;
 import kazpost.kz.mobterminal.di.module.ActivityModule;
 import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;

@@ -1,6 +1,7 @@
 package kazpost.kz.mobterminal;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.facebook.stetho.Stetho;
 
@@ -39,4 +40,7 @@ public class MyApp extends Application{
         return mApplicationComponent;
     }
 
+    public static MyApp get(Context context) {
+        return (MyApp) context.getApplicationContext();
+    }
 }
