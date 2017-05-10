@@ -47,6 +47,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         getActivityComponent().inject(this);
 
         mPresenter.onAttach(LoginActivity.this);
+
+        if (mPresenter.isLoggedIn()){
+            openMainActivity();
+            finish();
+        }
     }
 
 

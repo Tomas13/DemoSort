@@ -74,7 +74,17 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void saveLastLoginTime(String dateTime) {
+        mPreferencesHelper.saveLastLoginTime(dateTime);
+    }
+
+    @Override
     public String getSessionId() {
         return mPreferencesHelper.getSessionId();
+    }
+
+    @Override
+    public String getLastLoginTime() {
+        return mPreferencesHelper.getLastLoginTime();
     }
 }

@@ -8,5 +8,9 @@ public interface PreferencesHelper {
 
     void saveSessionId(String sessionId);
 
+    void saveLastLoginTime(String dateTime);
+
     String getSessionId();
+
+    String getLastLoginTime();
 }

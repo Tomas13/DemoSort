@@ -19,6 +19,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
     private final SharedPreferences mPrefs;
 
     private static final String PREF_KEY_SESSION_ID = "PREF_KEY_SESSION_ID";
+    private static final String PREF_KEY_DATE_TIME = "PREF_KEY_DATE_TIME";
 
 
     @Inject
@@ -33,7 +34,17 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
+    public void saveLastLoginTime(String dateTime) {
+        mPrefs.edit().putString(PREF_KEY_DATE_TIME, dateTime).apply();
+    }
+
+    @Override
     public String getSessionId() {
         return mPrefs.getString(PREF_KEY_SESSION_ID, "no_session_id");
+    }
+
+    @Override
+    public String getLastLoginTime() {
+        return mPrefs.getString(PREF_KEY_DATE_TIME, "no_login_time");
     }
 }

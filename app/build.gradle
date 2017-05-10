@@ -19,6 +19,16 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file("jean/Documents/keystore/mobterminalkey.jks")
+            storePassword "123456"
+            keyAlias "mobterminalkey"
+            keyPassword "123456"
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

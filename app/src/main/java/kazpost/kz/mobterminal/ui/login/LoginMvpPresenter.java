@@ -13,6 +13,8 @@ public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<
 
     void onLoginCodeScan();
 
+    boolean isLoggedIn();
+
     void onLoginBtnClicked(String barcode, String pin);
 
 }

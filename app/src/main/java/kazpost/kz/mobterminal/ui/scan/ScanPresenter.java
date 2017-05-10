@@ -80,9 +80,11 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
 
                                 default:
-                                    Log.d(TAG, "throwable " + responseInfo.getResponseText());
+                                    Log.d(TAG, "default " + responseInfo.getResponseText());
 
                                     getMvpView().onErrorToast(responseInfo.getResponseText());
+                                    getMvpView().readyForNextScan();
+
                                     break;
                             }
 
@@ -93,6 +95,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
                             getMvpView().onErrorToast(throwable.getMessage());
                             getMvpView().hideLoading();
+
                         });
 
 
@@ -150,6 +153,10 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                     getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
                                     getMvpView().readyForNextScan();
 
+                                    break;
+
+                                default:
+                                    getMvpView().readyForNextScan();
                                     break;
                             }
                             getMvpView().hideLoading();

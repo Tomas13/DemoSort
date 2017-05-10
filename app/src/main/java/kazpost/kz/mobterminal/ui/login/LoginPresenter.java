@@ -2,6 +2,11 @@ package kazpost.kz.mobterminal.ui.login;
 
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import kazpost.kz.mobterminal.data.DataManager;
@@ -34,6 +39,38 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     }
 
     @Override
+    public boolean isLoggedIn() {
+        String lastLoginTime = getDataManager().getLastLoginTime();
+        Long l = 0L;
+        int fifteenMinInMs = 900000;
+
+
+        SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+        try {
+            Date date = formatter3.parse(lastLoginTime);
+
+            Date currentDate = new Date();
+
+
+            l = currentDate.getTime() - date.getTime();
+
+            Log.d("LoginPresenter: ", " " + l);
+
+
+        } catch (ParseException e) {
+            Log.d("LoginPresenter: ", e.toString());
+
+        }
+
+        if (!lastLoginTime.equals("no_login_time") && l < fifteenMinInMs) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    @Override
     public void onLoginBtnClicked(String barcode, String pin) {
 
         getMvpView().showLoading();
@@ -61,10 +98,12 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
                             if (responseInfo.getResponseCode().equals("0")) {
 
-//                                String responseGenTime = responseInfo.getResponseGenTime();
+                                String responseGenTime = responseInfo.getResponseGenTime();
                                 String sessioId = envelope.getBody().getAuthorizeResponse().getSessionId();
 
                                 getDataManager().saveSessionId(sessioId);
+
+                                getDataManager().saveLastLoginTime(responseGenTime);
 
                                 getMvpView().openMainActivity();
 
