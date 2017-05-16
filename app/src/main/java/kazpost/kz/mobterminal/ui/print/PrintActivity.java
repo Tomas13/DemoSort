@@ -1,22 +1,27 @@
 package kazpost.kz.mobterminal.ui.print;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import app.akexorcist.bluetotohspp.library.BluetoothSPP;
+import app.akexorcist.bluetotohspp.library.BluetoothState;
+import app.akexorcist.bluetotohspp.library.DeviceList;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 
@@ -54,10 +59,6 @@ public class PrintActivity extends BaseActivity {
     LinearLayout llMainPrint;
     @BindView(R.id.et_code_g)
     EditText etCodeG;
-    @BindView(R.id.btn_back_closecell)
-    Button btnBackClosecell;
-    @BindView(R.id.btn_next_closecell)
-    Button btnNextClosecell;
     @BindView(R.id.ll_print_buttons)
     LinearLayout llPrintButtons;
 
@@ -75,6 +76,10 @@ public class PrintActivity extends BaseActivity {
     String toDepNameTitle;
     @BindString(R.string.bag_close_time)
     String closeTimeTitle;
+    @BindView(R.id.btn_choose_printer)
+    Button btnChoosePrinter;
+    @BindView(R.id.btn_repeat_print)
+    Button btnRepeatPrint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +88,8 @@ public class PrintActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         Bundle bundle = getIntent().getBundleExtra(PRINT_ACTIVITY);
+
+        bt = new BluetoothSPP(this);
 
 
         if (bundle != null) {
@@ -121,6 +128,45 @@ public class PrintActivity extends BaseActivity {
             tvCloseBagTime.setText(closeTimeTitle + " " + date2);
             tvOperatorName.setText(operatorTitle + " " + operatorName);
 
+        }
+    }
+
+    @OnClick({R.id.btn_choose_printer, R.id.btn_repeat_print})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_choose_printer:
+                Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+                startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+                break;
+            case R.id.btn_repeat_print:
+                break;
+        }
+    }
+
+    private BluetoothSPP bt;
+
+    public void onStart() {
+        super.onStart();
+        if (!bt.isBluetoothEnabled()) {
+            // Do somthing if bluetooth is disable
+        } else {
+            // Do something if bluetooth is already enable
+        }
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
+            if(resultCode == Activity.RESULT_OK)
+                bt.connect(data);
+        } else if(requestCode == BluetoothState.REQUEST_ENABLE_BT) {
+            if(resultCode == Activity.RESULT_OK) {
+                bt.setupService();
+                bt.startService(BluetoothState.DEVICE_ANDROID);
+//                setup();
+            } else {
+                // Do something if user doesn't choose any device (Pressed back)
+            }
         }
     }
 }
