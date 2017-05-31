@@ -56,15 +56,24 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
                 String sealNumber = etNumberSeal.getText().toString();
 
                 String wei = "weight";
-                if (etWeight.getText().length() != 0){
+                if (etWeight.getText().length() != 0) {
                     wei = etWeight.getText().toString();
                 }
 
-                presenter.closeBagRequest(bagBarcode, sealNumber, wei);
+                if (checkEmptyFields(bagBarcode, sealNumber, wei)) {
+                    presenter.closeBagRequest(bagBarcode, sealNumber, wei);
+                }else{
+                    onErrorToast("Заполните все поля");
+                }
+
 
 
                 break;
         }
+    }
+
+    private boolean checkEmptyFields(String bagBarcode, String sealNumber, String wei) {
+        return bagBarcode.length() > 0 && sealNumber.length() > 0 && wei.length() > 0;
     }
 
     @Override
